@@ -1,0 +1,11 @@
+{
+    "schoolName": "My School",
+    "schoolIconURL": "https://myschool.com/icon.png",
+    "lockTimes": ["09:00", "10:00"],
+    "schoolWebsiteURL": "https://myschool.com",
+    "databaseIp": "localhost",
+    "databaseName": "smartboard",
+    "databaseUsername": "root",
+    "databasePassword": "superSecretPassword",
+    "jwtKey": "superSecretKey"
+}

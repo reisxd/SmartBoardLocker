@@ -1,0 +1,41 @@
+﻿@page "/login"
+
+<div class="padding">
+    <div class="center-align">
+        <h4 class="center-align">Giriş</h4>
+
+    </div>
+    <div class="medium-space"></div>
+    <div class="center-align">
+        <nav id="buttons" style="justify-content: center;">
+            <div class="field label border round">
+                <input id="username" type="text" placeholder=" ">
+                <label>Kullanıcı adı veya E-Posta</label>
+            </div>
+        </nav>
+
+        <nav id="buttons" style="justify-content: center;">
+            <div class="field label border round">
+                <input id="password" type="password" placeholder=" ">
+                <label>Şifre</label>
+            </div>
+        </nav>
+        <nav id="buttons" style="justify-content: center;">
+            <button onclick="login()">Giriş Yap</button>
+        </nav>
+    </div>
+</div>
+
+<script>
+    async function login() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const req = await fetch(`/api/Auth/Login?username=${username}&password=${password}`, {
+            credinentials: 'include'
+        });
+
+        if (req.ok) {
+            location.href = '/';
+        } else alert('Hatalı şifre veya kullanıcı adı.');
+    }
+</script>

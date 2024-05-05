@@ -1,0 +1,43 @@
+﻿@page "/unlocker"
+
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            Akıllı Tahta Kilit Açma Sistemi
+        </h1>
+        <section id="qr-readers"></section>
+        <p class="subtitle">
+            İlk öncelikle <strong>Request Camera Permissions</strong> Butonuna basın.
+        </p>
+        <p class="subtitle">
+            Ondan sonra ise <strong>Karekodu</strong> taratın.
+        </p>
+    </div>
+</section>
+<script src="html5-qrcode.min.js"></script>
+<script>
+
+    fetch('/api/Auth/Me', { credinentials: 'include'}).then(res => {
+        if (!res.ok) {
+            alert('Giriş yapmadınız.');
+            location.href = '/Login';
+        }
+    })
+
+    var resultContainer = document.getElementById('qr-reader-results');
+    var lastResult, countResults = 0;
+    function onScanSuccess(decodedText, decodedResult) {
+        if (decodedText !== lastResult) {
+            ++countResults;
+            lastResult = decodedText;
+            // Handle on success condition with the decoded message.
+            fetch(`/api/Unlocker/Unlock?code=${decodedText}`);
+
+            console.log(`Scan result ${decodedText}`, decodedResult);
+        }
+    }
+
+    var html5QrcodeScanner = new Html5QrcodeScanner(
+        "qr-readers", { fps: 10, qrbox: 250 });
+    html5QrcodeScanner.render(onScanSuccess);
+</script>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SmartBoardLocker (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SmartBoardLocker (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

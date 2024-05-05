@@ -1,0 +1,63 @@
+﻿@page "/admin/devices"
+@inject List<Types.DeviceClient> devices
+@inject Microsoft.AspNetCore.Authorization.IAuthorizationService AuthorizationService
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@using Types
+@using Newtonsoft.Json
+
+@if (!HttpContextAccessor.HttpContext.User.IsInRole("Admin"))
+{
+    <h1>Yetkiniz yok.</h1>
+    return;
+}
+
+<h3 class="">Cihazlar</h3>
+
+<nav style="flex-direction: column; ">
+    @foreach (var device in devices)
+    {
+        <article class="round">
+            <div class="row">
+                <div class="max">
+                    <h5>@device.ClassName</h5>
+                </div>
+            </div>
+            <nav style="flex-direction: column;" data-className="@device.ClassName">
+                <button data-func="UnlockBoard" onclick="AdminFunction()"><i>lock_open</i> Kilidi aç</button>
+                <button data-func="Shutdown" onclick="AdminFunction()"><i>power_settings_new</i> Kapat</button>
+                <button data-func="Restart" onclick="AdminFunction()"><i>restart_alt</i> Yeniden Başlat</button>
+                <button data-func="RunCommand" onclick="RunCommand()"><i>terminal</i> CMD</button>
+            </nav>
+        </article>
+    }
+</nav>
+
+<script>
+    async function AdminFunction() {
+        const className = event.target.parentElement.getAttribute('data-className');
+        const func = event.target.getAttribute('data-func');
+        const req = await fetch(`/api/Admin/${func}?className=${className}`, {
+            credinentials: 'include'
+        });
+
+        if (!req.ok) {
+            alert('Hata oluştu.');
+        } else location.reload();
+    }
+
+    async function RunCommand() {
+        const className = event.target.parentElement.getAttribute('data-className');
+        const command = prompt('Komut girin:');
+        const req = await fetch(`/api/Admin/RunCommand?className=${className}&command=${command}`, {
+            credinentials: 'include'
+        });
+
+        if (!req.ok) {
+            alert('Hata oluştu.');
+        } else {
+            const response = await req.text();
+            alert(response);
+            console.log(response);
+        }
+    }
+</script>

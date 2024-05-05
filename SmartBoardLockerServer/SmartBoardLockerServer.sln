@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartBoardLockerServer", "SmartBoardLockerServer.csproj", "{975E0262-21E7-4CDB-B458-B681D4DB37F7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{975E0262-21E7-4CDB-B458-B681D4DB37F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{975E0262-21E7-4CDB-B458-B681D4DB37F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{975E0262-21E7-4CDB-B458-B681D4DB37F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{975E0262-21E7-4CDB-B458-B681D4DB37F7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A93D055-BA67-4E8B-9F44-C2B1BFE8B176}
+	EndGlobalSection
+EndGlobal

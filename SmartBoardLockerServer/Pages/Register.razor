@@ -1,0 +1,59 @@
+@page "/register"
+
+<div class="padding">
+    <div class="center-align">
+        <h4 class="center-align">Kayıt</h4>
+
+    </div>
+    <div class="medium-space"></div>
+    <div class="center-align">
+        <nav id="buttons" style="justify-content: center;">
+            <div class="field label border round">
+                <input id="username" type="text" placeholder=" ">
+                <label>Kullanıcı adı</label>
+            </div>
+        </nav>
+
+        <nav id="buttons" style="justify-content: center;">
+            <div class="field label border round">
+                <input id="name" type="text" placeholder=" ">
+                <label>İsim ve soyisim</label>
+            </div>
+        </nav>
+
+        <nav id="buttons" style="justify-content: center;">
+            <div class="field label border round">
+                <input id="password" type="password" placeholder=" ">
+                <label>Şifre</label>
+            </div>
+        </nav>
+        <nav id="buttons" style="justify-content: center;">
+            <button onclick="register()">Kayıt ol</button>
+        </nav>
+    </div>
+</div>
+
+
+<script>
+    async function register() {
+        const formData = new FormData();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const nameSurname = document.getElementById('name').value;
+        formData.append('username', username);
+        formData.append('password', password);
+        formData.append('nameSurname', nameSurname);
+        const req = await fetch('/api/Auth/Register', {
+            credinentials: 'include',
+            body: formData,
+            method: 'POST'
+        });
+
+        if (req.ok) {
+            location.href = '/Login';
+        } else {
+            const response = await req.text();
+            alert(response)
+        }
+    }
+</script>
